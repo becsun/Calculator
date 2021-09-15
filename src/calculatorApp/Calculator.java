@@ -1,32 +1,42 @@
 package calculatorApp;
 
-import java.util.Random;
 import java.util.Scanner;
 
-public class Calculator {
+public class Calculator implements Calculation{
+
+    private int one;
+    private int two;
+    private String operator;
+
+    public Calculator(int one, int two, String operator) {
+        this.one = one;
+        this.two = two;
+        this.operator = operator;
+
+    }
+
+    @Override
+    public void minus() {
+        Minus minusResult = new Minus(this.one,this.two);
+        System.out.println(this.one +" - "+ this.two + " = " + minusResult.getMinus());
+    }
+
+    @Override
+    public void add() {
+        Add addResult = new Add(this.one,this.two);
+        System.out.println(this.one +" + "+ this.two + " = " + addResult.getAdd());
+    }
+
+    @Override
+    public void multiply() {
+        Multiply multiplyResult = new Multiply(this.one,this.two);
+        System.out.println(this.one +" * "+ this.two + " = " + multiplyResult.getMultiplied());
+    }
 
 
     public static void main(String[] args) {
+
         System.out.println("Welcome to the calculator!");
-//        Random random = new Random();
-//        int randomNumber = random.nextInt(100);
-//        int randomNumberTwo = random.nextInt(100);
-
-//        System.out.println("Random number one:" + randomNumber + "\n" +
-//                            "Random number two: "+randomNumberTwo);
-
-//        System.out.println( "Enter an operation to perform: + (add), * (multiply) or - (subtract).");
-//
-//        Scanner scanner = new Scanner(System.in); String input = scanner.next();
-//
-//        if (input.equals("+")){
-//            System.out.println(randomNumber + randomNumberTwo);
-//        }else if  (input.equals("-")){
-//            System.out.println(randomNumber - randomNumberTwo);
-//        }else if  (input.equals("*")) {
-//            System.out.println(randomNumber * randomNumberTwo);
-//        }
-
         System.out.println("pick a number:");
         Scanner scanner = new Scanner(System.in);
         int numOne = scanner.nextInt();
@@ -35,13 +45,15 @@ public class Calculator {
         System.out.println( "Enter an operation to perform: + (add), * (multiply) or - (subtract).");
         String operator = scanner.next();
 
-        if (operator.equals("+")){
-            System.out.println(numOne +" + "+ numTwo + " = " + numOne + numTwo);
-        }else if  (operator.equals("-")){
-            System.out.println(numOne +" - "+ numTwo + " = " + (numOne - numTwo));
-        }else if  (operator.equals("*")) {
-            System.out.println(numOne +" * "+ numTwo + " = " +numOne * numTwo);
+        if (operator.equals("-")){
+            Calculator minus = new Calculator(numOne,numTwo,"-");
+            minus.minus();
+        }else if (operator.equals("+")){
+            Calculator add = new Calculator(numOne,numTwo,"+");
+            add.add();
+        }else if (operator.equals("*")) {
+            Calculator multiply = new Calculator(numOne,numTwo,"*");
+            multiply.multiply();
         }
-
     }
 }
